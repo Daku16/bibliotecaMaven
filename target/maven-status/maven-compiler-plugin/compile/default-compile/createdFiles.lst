@@ -1,7 +1,7 @@
 co\edu\etitc\sistemas\programacion\Main.class
+co\edu\etitc\sistemas\programacion\Computador.class
 co\edu\etitc\sistemas\programacion\TipoComputador.class
 co\edu\etitc\sistemas\programacion\Recurso.class
-co\edu\etitc\sistemas\programacion\Computador.class
 co\edu\etitc\sistemas\programacion\ServicioBiblioteca.class
 co\edu\etitc\sistemas\programacion\Periodico.class
 co\edu\etitc\sistemas\programacion\Libro.class

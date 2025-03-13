@@ -27,3 +27,8 @@ El IoC es un principio de diseño donde el control de la creación y gestión de
  ** Anotaciones @Repository
 
  ** Inyección de dependencias
+
+ ## Explique cómo funciona la inyección de propiedades en Spring utilizando @Value y qué precedencia tiene cada fuente.
+
+ La inyección de propiedades en Spring mediante @Value permite asignar valores a campos de componentes desde múltiples fuentes externas, como archivos de propiedades (application.properties), variables de entorno o argumentos de línea de comandos. Spring sigue un orden de precedencia para resolver conflictos: los argumentos de línea de comandos (ej: --app.name="valor") tienen la máxima prioridad, seguidos de las variables de entorno, luego los archivos específicos de perfil (como application-dev.properties), el archivo general application.properties, y finalmente los valores predeterminados definidos directamente en @Value (ej: @Value("${app.name:Default}")). Este mecanismo garantiza flexibilidad, permitiendo sobrescribir configuraciones según el entorno (desarrollo, producción, etc.) mientras se mantiene un valor base seguro en caso de que otras fuentes no estén disponibles.
+

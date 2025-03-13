@@ -2,35 +2,34 @@ package co.edu.etitc.sistemas.programacion;
 
 import java.time.LocalDateTime;
 
-public class Computador extends Recurso{
+public class Computador extends Recurso {
 
     private String marca;
     private String modelo;
     private String sistemaOperativo;
-    private TipoComputador TipoComputador;
 
-    public Computador(String marca, String modelo, String sistemaOperativo, boolean activo, LocalDateTime fechaIngreso, String nombre) {
+    public Computador(String marca, String modelo, String sistemaOperativo, boolean activo, LocalDateTime fechaIngreso,
+            String nombre) {
         super(activo, fechaIngreso, nombre);
         this.marca = marca;
         this.modelo = modelo;
         this.sistemaOperativo = sistemaOperativo;
     }
 
-    
-
     @Override
     public boolean coincideConCriterio(String criterio) {
-        return super.coincideConCriterio(criterio) || marca.contains(criterio) || modelo.contains(criterio) || sistemaOperativo.contains(criterio);
+        return super.coincideConCriterio(criterio) || marca.contains(criterio) || modelo.contains(criterio)
+                || sistemaOperativo.contains(criterio);
     }
 
     @Override
     public String toString() {
-        return  "Computador: " + this.getNombre()+"\n" +
-           "Marca: " + marca + "\n" +
-           "Modelo: " + modelo + "\n" +
-           "SistemaOperativo: " + sistemaOperativo + "\n" +
-           " ";
-}
+        return "Computador: " + this.getNombre() + "\n" +
+                "Marca: " + marca + "\n" +
+                "Modelo: " + modelo + "\n" +
+                "SistemaOperativo: " + sistemaOperativo + "\n" +
+                " ";
+    }
 
     public String getMarca() {
         return marca;
@@ -56,9 +55,4 @@ public class Computador extends Recurso{
         this.sistemaOperativo = sistemaOperativo;
     }
 
-    
-    
-
-
-    
 }
