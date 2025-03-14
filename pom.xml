@@ -28,6 +28,37 @@
 
     <build>
         <plugins>
+
+
+<plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-shade-plugin</artifactId>
+      <version>3.4.1</version>
+      <executions>
+        <execution>
+          <phase>package</phase>
+          <goals>
+            <goal>shade</goal>
+          </goals>
+          <configuration>
+            <transformers>
+              <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                <mainClass>co.edu.etitc.sistemas.programacion.Main</mainClass>
+              </transformer>
+            </transformers>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+
+            <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>3.10.1</version>
+      <configuration>
+        <release>17</release>
+      </configuration>
+    </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -35,13 +66,11 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>src.main.java.co.edu.etitc.sistemas.programacion.Main</mainClass>
+                            <mainClass>co.edu.etitc.sistemas.programacion.Main</mainClass>
                         </manifest>
                     </archive>
-                
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>

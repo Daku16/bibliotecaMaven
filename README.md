@@ -22,13 +22,9 @@ El proyecto está basado en la clase `Main` que realiza las siguientes acciones:
 - `Periodico`: Clase que representa un periódico.
 - `Computador`: Clase que representa un computador.
 
+## Ejecucion
 
-### Ejecución
-
-Para ejecutar el proyecto, use alguno de los siguientes comandos de Maven:
-
-
->mvn exec:java -Dexec.mainClass="co.edu.etitc.sistemas.programacion.Main"
-
-
->c: && cd c:\Users\rojas\OneDrive\Documentos\Universidad\ProgramacionIV\ejercicio-maven && cmd /C "C:\WorkSpace\jdk-21_windows-x64_bin\jdk-21.0.6\bin\java.exe -XX:+ShowCodeDetailsInExceptionMessages -cp C:\Users\rojas\OneDrive\Documentos\Universidad\ProgramacionIV\ejercicio-maven\target\classes co.edu.etitc.sistemas.programacion.Main "
+ & mvn compile -f "c:Direccion del proyecto"
+ mvn clean package   
+ cd .\target\         
+ java -jar ejercicio-maven-1.0-SNAPSHOT.jar     

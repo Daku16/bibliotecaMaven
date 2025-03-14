@@ -4,21 +4,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ServicioBiblioteca {
 
-    private final Repositorio<Libro> libroRepositorio;
-    private final Repositorio<Periodico> periodicoRepositorio;
-    private final Repositorio<Computador> computadorRepositorio;
+    private final RecursoRepositorio<Libro> libroRepositorio;
+    private final RecursoRepositorio<Periodico> periodicoRepositorio;
+    private final RecursoRepositorio<Computador> computadorRepositorio;
 
-    @Autowired
     public ServicioBiblioteca(
-            Repositorio<Libro> libroRepositorio,
-            Repositorio<Periodico> periodicoRepositorio,
-            Repositorio<Computador> computadorRepositorio) {
+            RecursoRepositorio<Libro> libroRepositorio,
+            RecursoRepositorio<Periodico> periodicoRepositorio,
+            RecursoRepositorio<Computador> computadorRepositorio) {
 
         this.libroRepositorio = libroRepositorio;
         this.periodicoRepositorio = periodicoRepositorio;

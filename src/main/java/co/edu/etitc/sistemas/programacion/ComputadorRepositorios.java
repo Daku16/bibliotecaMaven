@@ -1,12 +1,13 @@
 package co.edu.etitc.sistemas.programacion;
 
-import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 @Repository
-public class ComputadorRepositorios implements Repositorio<Computador> {
+public class ComputadorRepositorios implements RecursoRepositorio<Computador> {
 
     private final List<Computador> computadores = new ArrayList<>();
 

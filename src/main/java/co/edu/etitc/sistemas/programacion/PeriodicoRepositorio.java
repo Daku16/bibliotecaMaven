@@ -1,12 +1,13 @@
 package co.edu.etitc.sistemas.programacion;
 
-import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 @Repository
-public class PeriodicoRepositorio implements Repositorio<Periodico> {
+public class PeriodicoRepositorio implements RecursoRepositorio<Periodico> {
 
     private final List<Periodico> periodicos = new ArrayList<>();
 
