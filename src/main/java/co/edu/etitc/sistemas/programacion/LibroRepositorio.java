@@ -3,10 +3,11 @@ package co.edu.etitc.sistemas.programacion;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-@Repository
+@Component
 public class LibroRepositorio implements RecursoRepositorio<Libro> {
 
     private final List<Libro> libros = new ArrayList<>();
@@ -24,11 +25,8 @@ public class LibroRepositorio implements RecursoRepositorio<Libro> {
     @Override
     public Collection<Libro> buscar(String criterio) {
         return libros.stream()
-                .filter(l -> l.getNombre().contains(criterio)
-                        || l.getAutor().contains(criterio)
-                        || l.getEditorial().contains(criterio)
-                        || String.valueOf(l.getAnio()).contains(criterio))
-                .toList();
+                .filter(libro -> libro.coincideConCriterio(criterio))
+                .collect(Collectors.toList());
     }
 
     @Override

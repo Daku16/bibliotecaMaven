@@ -55,4 +55,33 @@ public class Computador extends Recurso {
         this.sistemaOperativo = sistemaOperativo;
     }
 
+    @Override
+    public boolean getActivo() {
+        return super.getActivo();
+    }
+
+    @Override
+    public void setActivo(boolean activo) {
+        super.setActivo(activo);
+    }
+
+    @Override
+    public LocalDateTime getFechaIngreso() {
+        return super.getFechaIngreso();
+    }
+
+    @Override
+    public void setFechaIngreso(LocalDateTime fechaIngreso) {
+        super.setFechaIngreso(fechaIngreso);
+    }
+
+    @Override
+    public String getNombre() {
+        return super.getNombre();
+    }
+
+    @Override
+    public void setNombre(String nombre) {
+        super.setNombre(nombre);
+    }
 }

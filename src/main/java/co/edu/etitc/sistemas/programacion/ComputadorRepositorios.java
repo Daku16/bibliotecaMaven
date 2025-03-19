@@ -3,10 +3,11 @@ package co.edu.etitc.sistemas.programacion;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-@Repository
+@Component
 public class ComputadorRepositorios implements RecursoRepositorio<Computador> {
 
     private final List<Computador> computadores = new ArrayList<>();
@@ -24,11 +25,8 @@ public class ComputadorRepositorios implements RecursoRepositorio<Computador> {
     @Override
     public Collection<Computador> buscar(String criterio) {
         return computadores.stream()
-                .filter(p -> p.getNombre().contains(criterio)
-                        || p.getMarca().contains(criterio)
-                        || p.getModelo().contains(criterio)
-                        || p.getSistemaOperativo().contains(criterio))
-                .toList();
+                .filter(computador -> computador.coincideConCriterio(criterio))
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -18,17 +18,13 @@ public class Main {
                         biblioteca.agregarRecurso(
                                         new Libro("Habitos atomicos", LocalDateTime.now(), true, "James Clear",
                                                         "Paidos", "2018"));
-                        biblioteca.agregarRecurso(
-                                        new Libro("Colombia una nacion a pesar de si misma", LocalDateTime.now(), true,
-                                                        "David Bushnell", "Critica", "1996"));
 
                         biblioteca.agregarRecurso(
                                         new Periodico("El Tiempo", LocalDate.of(2023, 10, 15), true,
                                                         LocalDateTime.now(), "El Tiempo"));
-                        biblioteca.agregarRecurso(new Periodico("El Espectador", LocalDate.of(2023, 10, 10), true,
-                                        LocalDateTime.now(), "El Espectador"));
-                        biblioteca.agregarRecurso(new Periodico("La República", LocalDate.of(2023, 10, 5), false,
-                                        LocalDateTime.now(), "La República"));
+                        biblioteca.agregarRecurso(
+                                        new Periodico("El Espectador", LocalDate.of(2023, 10, 10), true,
+                                                        LocalDateTime.now(), "El Espectador"));
 
                         biblioteca.agregarRecurso(
                                         new Computador("Apple", "MacBook Pro", "macOS", true, LocalDateTime.now(),
@@ -36,11 +32,14 @@ public class Main {
                         biblioteca.agregarRecurso(
                                         new Computador("Dell", "XPS 13", "Windows 11", true, LocalDateTime.now(),
                                                         "Dell XPS 13"));
-                        biblioteca.agregarRecurso(new Computador("Lenovo", "ThinkPad X1 Carbon", "Ubuntu 22.04", false,
-                                        LocalDateTime.now(), "Lenovo ThinkPad"));
+
+                        System.out.println("\n=== Ejemplo inyeccion ===\n");
+                        Aplicacion app = context.getBean(Aplicacion.class);
+                        app.ejecutar();
+                        System.out.println("\n=== Fin Ejemplo inyeccion ===");
 
                         System.out.println("\n=== Recursos iniciales ===");
-                        imprimirRecursos(biblioteca.obtenerTodos());
+                        biblioteca.obtenerTodos().forEach(System.out::println);
 
                         String criterioBusqueda = "Apple";
                         System.out.println("\nBuscando recursos con criterio: '" + criterioBusqueda + "'");
@@ -52,19 +51,8 @@ public class Main {
                         }
 
                         System.out.println("\n=== Recursos después de eliminar ===");
-                        imprimirRecursos(biblioteca.obtenerTodos());
+                        biblioteca.obtenerTodos().forEach(System.out::println);
                 }
 
         }
-
-        private static void imprimirRecursos(Collection<Recurso> recursos) {
-                if (recursos.isEmpty()) {
-                        System.out.println("No hay recursos registrados");
-                        return;
-                }
-
-                recursos.forEach(recurso -> System.out
-                                .println("- " + recurso.getClass().getSimpleName() + ": " + recurso));
-        }
-
 }
