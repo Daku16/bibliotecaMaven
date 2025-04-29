@@ -1,7 +1,15 @@
 co\edu\etitc\sistemas\programacion\Main.class
-co\edu\etitc\sistemas\programacion\TipoComputador.class
-co\edu\etitc\sistemas\programacion\Recurso.class
+co\edu\etitc\sistemas\programacion\PeriodicoRepositorio.class
+co\edu\etitc\sistemas\programacion\ejemplo\EjemploPractico.class
 co\edu\etitc\sistemas\programacion\Computador.class
+co\edu\etitc\sistemas\programacion\RecursoRepositorio.class
+co\edu\etitc\sistemas\programacion\InicioAplicacion.class
+co\edu\etitc\sistemas\programacion\TipoComputador.class
+co\edu\etitc\sistemas\programacion\LibroRepositorio.class
+co\edu\etitc\sistemas\programacion\Recurso.class
 co\edu\etitc\sistemas\programacion\ServicioBiblioteca.class
 co\edu\etitc\sistemas\programacion\Periodico.class
+co\edu\etitc\sistemas\programacion\ComputadorRepositorios.class
+co\edu\etitc\sistemas\programacion\Aplicacion.class
+co\edu\etitc\sistemas\programacion\AppConfig.class
 co\edu\etitc\sistemas\programacion\Libro.class

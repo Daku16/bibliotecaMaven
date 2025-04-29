@@ -2,7 +2,7 @@ package co.edu.etitc.sistemas.programacion;
 
 import java.time.LocalDateTime;
 
-public abstract class Recurso  {
+public abstract class Recurso {
     private String nombre;
     private LocalDateTime fechaIngreso;
     private boolean activo;
@@ -29,7 +29,7 @@ public abstract class Recurso  {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public boolean isActivo() {
+    public boolean getActivo() {
         return activo;
     }
 
@@ -37,18 +37,17 @@ public abstract class Recurso  {
         this.activo = activo;
     }
 
-    public void darDeBaja(){
-        this.activo =false;
+    public void darDeBaja() {
+        this.activo = false;
     }
 
-    public boolean coincideConCriterio(String criterio){
+    public boolean coincideConCriterio(String criterio) {
         return nombre.contains(criterio);
     }
 
-    public  String toString(){
-        return getClass().getSimpleName().toUpperCase() + "\nNombre: " + nombre + "\nFechaIngreso: " + fechaIngreso + "\nActivo: " + activo;
+    public String toString() {
+        return getClass().getSimpleName().toUpperCase() + "\nNombre: " + nombre + "\nFechaIngreso: " + fechaIngreso
+                + "\nActivo: " + activo;
     }
 
-
-    
 }
