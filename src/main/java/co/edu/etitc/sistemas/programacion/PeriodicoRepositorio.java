@@ -1,36 +1,28 @@
 package co.edu.etitc.sistemas.programacion;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.data.jdbc.repository.query.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import org.springframework.stereotype.Component;
-
-@Component
-public class PeriodicoRepositorio implements RecursoRepositorio<Periodico> {
-
-    private final List<Periodico> periodicos = new ArrayList<>();
-
-    @Override
-    public void agregar(Periodico periodico) {
-        periodicos.add(periodico);
-    }
-
-    @Override
-    public void eliminar(Periodico periodico) {
-        periodicos.remove(periodico);
-    }
+@Repository
+public interface PeriodicoRepositorio extends CrudRepository<Periodico, Integer> {
+    @Query("""
+        SELECT * FROM periodico 
+        WHERE nombre LIKE '%' || :criterio || '%' 
+           OR editorial LIKE '%' || :criterio || '%' 
+           OR TO_CHAR(fecha_publicacion, 'YYYY-MM-DD') LIKE '%' || :criterio || '%'
+           OR TO_CHAR(fecha_ingreso, 'YYYY-MM-DD HH24:MI:SS') LIKE '%' || :criterio || '%'
+           OR activo::TEXT LIKE '%' || :criterio || '%'
+    """)
+    Collection<Periodico> findByCriteria(String criterio);
 
     @Override
-    public Collection<Periodico> buscar(String criterio) {
-        return periodicos.stream()
-                .filter(periodico -> periodico.coincideConCriterio(criterio))
-                .collect(Collectors.toList());
-    }
+    <S extends Periodico> S save(S entity);
 
     @Override
-    public Collection<Periodico> obtenerTodos() {
-        return new ArrayList<>(periodicos);
-    }
+    void delete(Periodico entity);
+
+    @Override
+    Iterable<Periodico> findAll();
 }

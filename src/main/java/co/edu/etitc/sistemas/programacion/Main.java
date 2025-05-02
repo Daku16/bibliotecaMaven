@@ -1,58 +1,54 @@
 package co.edu.etitc.sistemas.programacion;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Collection;
-
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+@SpringBootApplication
 public class Main {
-        public static void main(String[] args) {
+    public static void main(String[] args) {
+        try (ConfigurableApplicationContext context = SpringApplication.run(Main.class, args)) {
 
-                try (var context = new AnnotationConfigApplicationContext(AppConfig.class)) {
-                        ServicioBiblioteca biblioteca = context.getBean(ServicioBiblioteca.class);
+		DataSource dataSource = context.getBean(DataSource.class);
 
-                        biblioteca.agregarRecurso(
-                                        new Libro("1984", LocalDateTime.now(), true, "George Orwell",
-                                                        "Blanco y negro SAS", "1949"));
-                        biblioteca.agregarRecurso(
-                                        new Libro("Habitos atomicos", LocalDateTime.now(), true, "James Clear",
-                                                        "Paidos", "2018"));
+            ServicioBiblioteca biblioteca = context.getBean(ServicioBiblioteca.class);
 
-                        biblioteca.agregarRecurso(
-                                        new Periodico("El Tiempo", LocalDate.of(2023, 10, 15), true,
-                                                        LocalDateTime.now(), "El Tiempo"));
-                        biblioteca.agregarRecurso(
-                                        new Periodico("El Espectador", LocalDate.of(2023, 10, 10), true,
-                                                        LocalDateTime.now(), "El Espectador"));
+            // Crear recursos de prueba
+            Libro libro1 = new Libro( null, "Gabriel García Márquez", "Sudamericana", "1967", "Cien años de soledad", LocalDateTime.now(), true);
 
-                        biblioteca.agregarRecurso(
-                                        new Computador("Apple", "MacBook Pro", "macOS", true, LocalDateTime.now(),
-                                                        "MacBook Pro 2023"));
-                        biblioteca.agregarRecurso(
-                                        new Computador("Dell", "XPS 13", "Windows 11", true, LocalDateTime.now(),
-                                                        "Dell XPS 13"));
+            Computador comp1 = new Computador(null, "Dell", "Workstation Dell", "Windows 11 Pro", "Dell", LocalDateTime.now(), true, TipoComputador.ESCRITORIO);
 
-                        System.out.println("\n=== Ejemplo inyeccion ===\n");
-                        Aplicacion app = context.getBean(Aplicacion.class);
-                        app.ejecutar();
-                        System.out.println("\n=== Fin Ejemplo inyeccion ===");
+            Periodico per1 = new Periodico(null, LocalDate.of(2023, 10, 20), "El espectador", "Casa Editorial El Espectador", LocalDateTime.now(), true);
 
-                        System.out.println("\n=== Recursos iniciales ===");
-                        biblioteca.obtenerTodos().forEach(System.out::println);
+            // Persistir recursos
+            biblioteca.agregarRecurso(libro1);
+            biblioteca.agregarRecurso(comp1);
+            biblioteca.agregarRecurso(per1);
 
-                        String criterioBusqueda = "Apple";
-                        System.out.println("\nBuscando recursos con criterio: '" + criterioBusqueda + "'");
+            // Buscar todos los recursos
+            System.out.println("\n=== Recursos iniciales ===");
+            biblioteca.obtenerTodos().forEach(System.out::println);
 
-                        Collection<Recurso> resultados = biblioteca.buscaRecursos(criterioBusqueda);
-                        if (!resultados.isEmpty()) {
-                                System.out.println("Recurso encontrado. Eliminando...");
-                                resultados.forEach(biblioteca::eliminarRecurso);
-                        }
+            // Búsqueda por criterio
+            String criterio = "Dell";
+            System.out.println("\nBuscando: " + criterio);
+            biblioteca.buscaRecursos(criterio).forEach(recurso -> {
+                System.out.println("Encontrado: " + recurso);
+                System.out.println("Eliminando...");
+                biblioteca.eliminarRecurso(recurso);
+            });
 
-                        System.out.println("\n=== Recursos después de eliminar ===");
-                        biblioteca.obtenerTodos().forEach(System.out::println);
-                }
-
+            // Resultado final
+            System.out.println("\n=== Recursos restantes ===");
+            biblioteca.obtenerTodos().forEach(System.out::println);
         }
+    }
+
 }
