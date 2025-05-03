@@ -3,20 +3,23 @@ package co.edu.etitc.sistemas.programacion;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.springframework.stereotype.Service;
 
 @Service
 public class ServicioBiblioteca {
 
-    private final RecursoRepositorio<Libro> libroRepositorio;
-    private final RecursoRepositorio<Periodico> periodicoRepositorio;
-    private final RecursoRepositorio<Computador> computadorRepositorio;
+    private final LibroRepositorio libroRepositorio;
+    private final PeriodicoRepositorio periodicoRepositorio;
+    private final ComputadorRepositorio computadorRepositorio;
 
     public ServicioBiblioteca(
-            RecursoRepositorio<Libro> libroRepositorio,
-            RecursoRepositorio<Periodico> periodicoRepositorio,
-            RecursoRepositorio<Computador> computadorRepositorio) {
+            LibroRepositorio libroRepositorio,
+            PeriodicoRepositorio periodicoRepositorio,
+            ComputadorRepositorio computadorRepositorio) {
 
         this.libroRepositorio = libroRepositorio;
         this.periodicoRepositorio = periodicoRepositorio;
@@ -25,37 +28,38 @@ public class ServicioBiblioteca {
 
     public void agregarRecurso(Recurso recurso) {
         if (recurso instanceof Libro) {
-            libroRepositorio.agregar((Libro) recurso);
+            libroRepositorio.save((Libro) recurso);
         } else if (recurso instanceof Periodico) {
-            periodicoRepositorio.agregar((Periodico) recurso);
+            periodicoRepositorio.save((Periodico) recurso);
         } else if (recurso instanceof Computador) {
-            computadorRepositorio.agregar((Computador) recurso);
+            computadorRepositorio.save((Computador) recurso);
         }
     }
 
     public void eliminarRecurso(Recurso recurso) {
         if (recurso instanceof Libro) {
-            libroRepositorio.eliminar((Libro) recurso);
+            libroRepositorio.delete((Libro) recurso);
         } else if (recurso instanceof Periodico) {
-            periodicoRepositorio.eliminar((Periodico) recurso);
+            periodicoRepositorio.delete((Periodico) recurso);
         } else if (recurso instanceof Computador) {
-            computadorRepositorio.eliminar((Computador) recurso);
+            computadorRepositorio.delete((Computador) recurso);
         }
     }
 
     public List<Recurso> buscaRecursos(String criterio) {
         List<Recurso> resultados = new ArrayList<>();
-        resultados.addAll(libroRepositorio.buscar(criterio));
-        resultados.addAll(periodicoRepositorio.buscar(criterio));
-        resultados.addAll(computadorRepositorio.buscar(criterio));
+        resultados.addAll(libroRepositorio.findByCriteria(criterio));
+        resultados.addAll(periodicoRepositorio.findByCriteria(criterio));
+        resultados.addAll(computadorRepositorio.findByCriteria(criterio));
         return resultados;
     }
 
     public List<Recurso> obtenerTodos() {
-        List<Recurso> todos = new ArrayList<>();
-        todos.addAll(libroRepositorio.obtenerTodos());
-        todos.addAll(periodicoRepositorio.obtenerTodos());
-        todos.addAll(computadorRepositorio.obtenerTodos());
-        return Collections.unmodifiableList(todos);
+        return Stream.concat(
+                Stream.concat(
+                        StreamSupport.stream(libroRepositorio.findAll().spliterator(), false),
+                        StreamSupport.stream(periodicoRepositorio.findAll().spliterator(), false)),
+                        StreamSupport.stream(computadorRepositorio.findAll().spliterator(), false))
+                .collect(Collectors.toList());
     }
 }
