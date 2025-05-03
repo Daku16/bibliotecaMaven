@@ -1,6 +1,7 @@
 package co.edu.etitc.sistemas.programacion;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
@@ -14,8 +15,10 @@ public class Computador implements Recurso {
     private String modelo;
     private String sistemaOperativo;
     private String nombre;
+    @Column("FECHA_INGRESO")
     private LocalDateTime fechaIngreso;
     private boolean activo;
+    @Column("TIPO_COMPUTADOR")
     private TipoComputador tipoComputador;
 
     public Computador(Integer id, String marca, String modelo, String sistemaOperativo, String nombre, LocalDateTime fechaIngreso, boolean activo, TipoComputador tipoComputador) {

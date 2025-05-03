@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +21,7 @@ public interface LibroRepositorio extends CrudRepository<Libro, Integer> {
            OR editorial LIKE '%' || :criterio || '%' 
            OR anio LIKE '%' || :criterio || '%'
     """)
-    Collection<Libro> findByCriteria(String criterio);
+    Collection<Libro> findByCriteria(@Param("criterio") String criterio);
 
     @Override
     <S extends Libro> S save(S entity);

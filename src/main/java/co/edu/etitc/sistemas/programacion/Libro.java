@@ -1,6 +1,7 @@
 package co.edu.etitc.sistemas.programacion;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ public class Libro implements Recurso {
     private String editorial;
     private String anio;
     private String nombre;
+    @Column("FECHA_INGRESO")
     private LocalDateTime fechaIngreso;
     private boolean activo;
 

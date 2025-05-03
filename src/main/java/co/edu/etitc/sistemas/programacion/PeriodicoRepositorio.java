@@ -3,6 +3,7 @@ package co.edu.etitc.sistemas.programacion;
 import java.util.Collection;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -15,7 +16,7 @@ public interface PeriodicoRepositorio extends CrudRepository<Periodico, Integer>
            OR TO_CHAR(fecha_ingreso, 'YYYY-MM-DD HH24:MI:SS') LIKE '%' || :criterio || '%'
            OR activo::TEXT LIKE '%' || :criterio || '%'
     """)
-    Collection<Periodico> findByCriteria(String criterio);
+    Collection<Periodico> findByCriteria(@Param("criterio") String criterio);
 
     @Override
     <S extends Periodico> S save(S entity);

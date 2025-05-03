@@ -1,6 +1,7 @@
 package co.edu.etitc.sistemas.programacion;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
@@ -11,9 +12,11 @@ public class Periodico implements Recurso {
 
     @Id
     private Integer id;
+    @Column("FECHA_PUBLICACION")
     private LocalDate fechaPublicacion;
     private String editorial;
     private String nombre;
+    @Column("FECHA_INGRESO")
     private LocalDateTime fechaIngreso;
     private boolean activo;
 
