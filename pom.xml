@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>co.edu.etitc.sistemas.programacion</groupId>
-    <artifactId>ejercicio-maven</artifactId>
+    <artifactId>Biblioteca</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencyManagement>
@@ -46,6 +46,11 @@
             <artifactId>spring-boot-starter-data-jdbc</artifactId>
             <version>3.4.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>3.5.0</version>
+        </dependency>
     </dependencies>
 
     <properties>
@@ -55,25 +60,25 @@
 
     <build>
         <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-compiler-plugin</artifactId>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
-              <configuration>
-                <release>17</release>
-              </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-jar-plugin</artifactId>
-                <version>3.4.2</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>co.edu.etitc.sistemas.programacion.Main</mainClass>
-                        </manifest>
-                    </archive>
+                    <release>17</release>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.4.4</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
