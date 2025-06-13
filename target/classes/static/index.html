@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Biblioteca - Gestión de Recursos</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+  <style>
+    .hidden { display: none; }
+    .formulario-recurso { margin-top: 10px; }
+  </style>
+</head>
+<body>
+<h1>Biblioteca - Gestión de Recursos</h1>
+
+<section>
+  <h2>Agregar / Editar Recurso</h2>
+  <div class="formulario-recurso">
+    <label for="tipoRecurso">Tipo:</label>
+    <select id="tipoRecurso" onchange="mostrarFormulario()">
+      <option value="Libro">Libro</option>
+      <option value="Periodico" selected>Periódico</option>
+      <option value="Computador">Computador</option>
+    </select>
+
+    <!-- Formulario común -->
+    <input type="text" id="nombre" placeholder="Nombre / Título">
+
+    <!-- Formulario específico - LIBRO -->
+    <div id="formLibro" class="hidden">
+      <input type="text" id="autor" placeholder="Autor">
+      <input type="text" id="editorialLibro" placeholder="Editorial">
+      <input type="text" id="anio" placeholder="Año de publicación">
+    </div>
+
+    <!-- Formulario específico - PERIODICO -->
+    <div id="formPeriodico" class="">
+      <label for="fechaPublicacion">Fecha de Publicación:</label>
+      <input type="date" id="fechaPublicacion" placeholder="Fecha Publicación">
+      <input type="text" id="editorialPeriodico" placeholder="Editorial">
+    </div>
+
+    <!-- Formulario específico - COMPUTADOR -->
+    <div id="formComputador" class="hidden">
+      <input type="text" id="marca" placeholder="Marca">
+      <input type="text" id="modelo" placeholder="Modelo">
+      <input type="text" id="sistemaOperativo" placeholder="Sistema Operativo">
+
+      <select id="tipoComputador">
+        <option value="PORTATIL">Portátil</option>
+        <option value="ESCRITORIO">Escritorio</option>
+      </select>
+
+    </div>
+    <label for="fechaPublicacion">Fecha de ingreso:</label>
+    <input type="datetime-local" id="fechaIngreso" placeholder="Fecha de ingreso">
+
+    <label><input type="checkbox" id="activo" checked> Activo</label>
+
+    <button onclick="guardarRecurso()">Guardar</button>
+  </div>
+</section>
+
+<section>
+  <h2>Buscar Recursos</h2>
+  <input type="text" id="criterioBusqueda" placeholder="Buscar por nombre...">
+  <button onclick="buscarRecursos()">Buscar</button>
+</section>
+
+<section>
+  <h2>Recursos Disponibles</h2>
+  <button onclick="cargarRecursos()">Actualizar lista</button>
+  <ul id="listaRecursos"></ul>
+</section>
+
+</body>
+</html>
