@@ -14,7 +14,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
+import org.springframework.jdbc.datasource.init.DataSourceInitializer;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -43,6 +46,18 @@ public class AppConfig implements WebMvcConfigurer {
         dataSource.setUrl("jdbc:h2:file:./data/db-biblioteca");
         return dataSource;
     }
+
+    @Bean
+    public DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
+        ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
+        resourceDatabasePopulator.addScript(new ClassPathResource("schema.sql"));
+
+        DataSourceInitializer initializer = new DataSourceInitializer();
+        initializer.setDataSource(dataSource);
+        initializer.setDatabasePopulator(resourceDatabasePopulator);
+        return initializer;
+    }
+
 
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(new String[]{"/static/**"}).addResourceLocations(new String[]{"classpath:/static/"});

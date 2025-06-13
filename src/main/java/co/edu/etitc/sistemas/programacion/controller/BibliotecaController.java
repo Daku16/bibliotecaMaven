@@ -35,17 +35,14 @@ public class BibliotecaController {
             path = {"/recursos"},
             produces = {"application/json"}
     )
-    public List<Recurso> obtenerRecursos() {
-        return this.servicioBiblioteca.obtenerTodos();
+    public List<Recurso> obtenerOBuscarRecursos(@RequestParam(name = "criterio", required = false) String criterio) {
+        if (criterio != null && !criterio.isEmpty()) {
+            return this.servicioBiblioteca.buscaRecursos(criterio);
+        } else {
+            return this.servicioBiblioteca.obtenerTodos();
+        }
     }
 
-    @GetMapping(
-            path = {"/recursos/buscar"},
-            produces = {"application/json"}
-    )
-    public List<Recurso> buscarRecursos(@RequestParam("criterio") String criterio) {
-        return this.servicioBiblioteca.buscaRecursos(criterio);
-    }
 
     @PostMapping({"/libro"})
     public ResponseEntity<Void> agregarLibro(@RequestBody Libro libro) {

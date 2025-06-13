@@ -107,7 +107,7 @@ async function buscarRecursos() {
     const criterio = document.getElementById('criterioBusqueda').value;
     const lista = document.getElementById('listaRecursos');
     lista.innerHTML = '';
-    const response = await fetch(`/api/recursos/buscar?criterio=${criterio}`);
+    const response = await fetch(`/api/recursos?criterio=${criterio}`);
     const resultados = await response.json();
 
     resultados.forEach(r => {
